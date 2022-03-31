@@ -29,7 +29,7 @@ class _AuthScreenState extends State<AuthScreen> {
         userCredential = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
         await FirebaseFirestore.instance
-            .collection('user')
+            .collection('users')
             .doc('${userCredential.user!.uid}')
             .set(
           {
