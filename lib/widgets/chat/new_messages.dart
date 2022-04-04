@@ -23,7 +23,7 @@ class _NewMessagesState extends State<NewMessages> {
       'createAt': Timestamp.now(),
       'userId': uid,
       'userName': userData['username'],
-      'userImageUrl': userData['userImageUrl']
+      'userImageUrl': userData['userImageUrl'],
     });
 
     _controller.clear();
@@ -33,10 +33,10 @@ class _NewMessagesState extends State<NewMessages> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: 8,
-      ),
-      padding: EdgeInsets.all(8),
+      // margin: EdgeInsets.only(
+      //   top: 8,
+      // ),
+      //padding: EdgeInsets.all(8),
       child: Row(children: [
         Expanded(
             child: TextField(

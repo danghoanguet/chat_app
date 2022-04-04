@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,35 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
+      builder: (context, AsyncSnapshot<User?> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
         if (snapshot.hasData) {
-          return ChatScreen();
+          final uid = snapshot.data!.uid;
+          return FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc('$uid')
+                  .get(),
+              builder: (context,
+                  AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> ss) {
+                if (ss.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (ss.hasData)
+                  return ChatScreen(
+                    userImageUrl: ss.data!['userImageUrl'],
+                    uid: uid,
+                  );
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              });
         }
         return AuthScreen();
       },
