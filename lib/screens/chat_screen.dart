@@ -8,6 +8,21 @@ import '../widgets/chat/new_messages.dart';
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   final fbm = FirebaseMessaging.instance;
+  //   fbm.requestPermission();
+  //   FirebaseMessaging.onMessage.listen((message) {
+  //     print(message);
+  //     return;
+  //   });
+  //   FirebaseMessaging.onMessageOpenedApp.listen((message) {
+  //     print(message);
+  //     return;
+  //   });
+  //   fbm.subscribeToTopic('chat');
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
